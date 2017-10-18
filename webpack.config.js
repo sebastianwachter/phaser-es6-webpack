@@ -24,8 +24,8 @@ module.exports = {
   devtool: 'cheap-source-map',
   output: {
     pathinfo: true,
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: './dist/',
+    path: path.resolve(__dirname, 'build'),
+    publicPath: './build/',
     filename: 'bundle.js',
   },
   watch: true,
@@ -36,7 +36,7 @@ module.exports = {
       filename: 'vendor.bundle.js'/* filename= */,
     }),
     new HtmlWebpackPlugin({
-      filename: '../index.html',
+      filename: '../build/index.html',
       template: './src/index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
@@ -67,6 +67,9 @@ module.exports = {
       { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
       { test: /p2\.js/, use: ['expose-loader?p2'] },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.(jpg|png|svg)$/, loader: 'file-loader', options: {
+        name: './assets/images/[hash].[ext]',
+      } },
     ],
   },
   node: {

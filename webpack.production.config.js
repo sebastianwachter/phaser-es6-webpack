@@ -24,12 +24,12 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './dist/',
+    publicPath: './',
     filename: 'bundle.js',
   },
   plugins: [
     definePlugin,
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist/*', 'dist']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.UglifyJsPlugin({
       // eslint-disable-next-line camelcase
@@ -44,7 +44,7 @@ module.exports = {
       filename: 'vendor.bundle.js'/* filename= */,
     }),
     new HtmlWebpackPlugin({
-      filename: '../index.html',
+      filename: '../dist/index.html',
       template: './src/index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
@@ -70,6 +70,9 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', {
         loader: 'css-loader', options: { minimize: true },
       }] },
+      { test: /\.(jpg|png|svg)$/, loader: 'file-loader', options: {
+        name: './assets/images/[hash].[ext]',
+      } },
     ],
   },
   node: {

@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import WebFont from 'webfontloader';
+import loaderBg from '../../assets/images/loader-bg.png';
+import loaderBar from '../../assets/images/loader-bar.png';
 
 export default class extends Phaser.State {
   init() {
@@ -24,8 +26,8 @@ export default class extends Phaser.State {
     );
     text.anchor.setTo(0.5, 0.5);
 
-    this.load.image('loaderBg', './assets/images/loader-bg.png');
-    this.load.image('loaderBar', './assets/images/loader-bar.png');
+    this.load.image('loaderBg', loaderBg);
+    this.load.image('loaderBar', loaderBar);
   }
 
   render() {
